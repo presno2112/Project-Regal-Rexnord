@@ -9,3 +9,6 @@ class Results(models.Model): # asi se hace relacional como en el diagrama? es mu
     score = models.IntegerField(default=0)
     time = models.FloatField(default=0.0)
     completed = models.BooleanField(default=False)
+
+    def __str__(self):
+        return str(self.user.first_name)

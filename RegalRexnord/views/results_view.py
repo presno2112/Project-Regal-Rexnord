@@ -15,3 +15,4 @@ class ResultsView(viewsets.ModelViewSet):
     permission_classes = [AllowAny] # cambiar despues de probar
     authentication_classes = (SessionAuthentication, TokenAuthentication)
     
+    

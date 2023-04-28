@@ -4,8 +4,9 @@ from rest_framework.response import Response
 from rest_framework.serializers import Serializer
 from rest_framework.decorators import action
 from rest_framework import viewsets, status
-from ..serializers.game_serializer import GameSerializer
+from ..serializers.game_serializer import GameSerializer, LeaderboardSerializer
 from ..models.game import Game
+from ..models.results import Results
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 
@@ -14,6 +15,16 @@ class GameView(viewsets.ModelViewSet):
     serializer_class = GameSerializer
     permission_classes = [AllowAny]
     authentication_classes = (SessionAuthentication, TokenAuthentication)
+
+    @action (methods=["GET"], detail=False, serializer_class=LeaderboardSerializer, permission_classes=[AllowAny])
+    def leaderboard(self, request):
+        games = Game.objects.all()
+        # print (games)
+        for game in games:
+            for result in game.leaderboard:
+                print(result)
+        response = LeaderboardSerializer(instance=games, many=True, context={'request': request}) # traer info, y preparala despues
+        return Response(response.data, status=status.HTTP_200_OK)
 
 # Hacer accion de leaderboard
 # post desde unity?

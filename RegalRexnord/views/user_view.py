@@ -18,7 +18,7 @@ class UserView(viewsets.ModelViewSet):
     permission_classes = ()
     authentication_classes = (SessionAuthentication, TokenAuthentication)
 
-    @action (methods="GET", detail=False, serializer_class=LoginSerializer, permission_classes=[IsAuthenticated])
+    @action (methods=["GET"], detail=False, serializer_class=LoginSerializer, permission_classes=[IsAuthenticated])
     def current_user(self, request):
         return Response({
             "user": str(request.user),
@@ -43,6 +43,15 @@ class UserView(viewsets.ModelViewSet):
             
             user.last_login = timezone.now
             user.save()
+            '''
+            token, created = Token.objects.get_or_create(user=user)
+            print(token)
+
+            return Response({"token":token.key}, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            '''
+            
 
     #Sign up
     
@@ -67,6 +76,6 @@ class UserView(viewsets.ModelViewSet):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
+# checar tokens y permisos
 
             
