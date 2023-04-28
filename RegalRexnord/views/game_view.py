@@ -20,9 +20,6 @@ class GameView(viewsets.ModelViewSet):
     def leaderboard(self, request):
         games = Game.objects.all()
         # print (games)
-        for game in games:
-            for result in game.leaderboard:
-                print(result)
         response = LeaderboardSerializer(instance=games, many=True, context={'request': request}) # traer info, y preparala despues
         return Response(response.data, status=status.HTTP_200_OK)
 
