@@ -23,6 +23,6 @@ class LoginSerializer(serializers.Serializer):
         required=True,
         style={'input_type': 'password'}
     )
-    email = serializers.CharField(
+    email = serializers.EmailField(
         required=True
     )

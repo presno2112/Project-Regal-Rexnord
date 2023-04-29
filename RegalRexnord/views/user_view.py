@@ -1,4 +1,5 @@
-from datetime import timezone
+from datetime import *
+from django.utils import timezone
 from django.forms import ValidationError
 from rest_framework.response import Response
 from rest_framework.serializers import Serializer
@@ -41,16 +42,15 @@ class UserView(viewsets.ModelViewSet):
             if not check_password(password, user.password):
                 raise ValidationError({"error": "Incorrect Password"})
             
-            user.last_login = timezone.now
+            user.last_login = timezone.now()
             user.save()
-            '''
+            print(user)
             token, created = Token.objects.get_or_create(user=user)
             print(token)
 
             return Response({"token":token.key}, status=status.HTTP_200_OK)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-            '''
             
 
     #Sign up
