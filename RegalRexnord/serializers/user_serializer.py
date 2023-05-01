@@ -30,3 +30,7 @@ class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField(
         required=True
     )
+
+class DashboardSerializer(serializers.Serializer):
+    dashboard_info = serializers.ReadOnlyField()
+    

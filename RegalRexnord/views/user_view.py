@@ -6,11 +6,10 @@ from rest_framework.serializers import Serializer
 from rest_framework.decorators import action
 from django.contrib.auth.hashers import check_password
 from rest_framework import viewsets, status
-from ..serializers.user_serializer import LoginSerializer
+from ..serializers.user_serializer import LoginSerializer, UserSerializer, DashboardSerializer
 from RegalRexnord.models.user import User, UserManager
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
-from RegalRexnord.serializers.user_serializer import UserSerializer
 from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 
 class UserView(viewsets.ModelViewSet):
@@ -51,7 +50,12 @@ class UserView(viewsets.ModelViewSet):
             return Response({"token":token.key}, status=status.HTTP_200_OK)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-            
+        
+
+    @action (methods=["GET"], detail=False, serializer_class=DashboardSerializer, permission_classes=[AllowAny])
+    def dashboard(self, request):
+        response = DashboardSerializer()
+        return Response(response.data, status=status.HTTP_200_OK)
 
     #Sign up
     
