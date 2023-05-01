@@ -42,10 +42,10 @@ class UserView(viewsets.ModelViewSet):
             if not check_password(password, user.password):
                 raise ValidationError({"error": "Incorrect Password"})
             
-            user.last_login = timezone.now()
+            user.last_login = timezone.now() 
             user.save()
             print(user)
-            token, created = Token.objects.get_or_create(user=user)
+            token, created = Token.objects.get_or_create(user=user) # que hago con esto??
             print(token)
 
             return Response({"token":token.key}, status=status.HTTP_200_OK)

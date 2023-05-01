@@ -7,8 +7,8 @@ class UserSerializer2(serializers.HyperlinkedModelSerializer):
         model = User
         fields = ["pk","first_name", "last_name"] # por que no me deja seleccionar entre los usuarios?
 
-class ResultsSerializer(serializers.HyperlinkedModelSerializer):
-    #user = UserSerializer2()
+class ResultsSerializer(serializers.ModelSerializer):
+    user_data = UserSerializer2(read_only=True, source="user")
     class Meta:
         model = Results
         fields = "__all__"

@@ -1,8 +1,11 @@
 from rest_framework import serializers
 from RegalRexnord.models import User
 
-#solo funciona con .Serializer
-class UserSerializer(serializers.HyperlinkedModelSerializer): #modelSerializer para enviar el id del usuario no el link
+class DashboardSerializer(serializers.Serializer):
+    pass
+
+# solo funciona con .Serializer
+class UserSerializer(serializers.ModelSerializer): #modelSerializer para enviar el id del usuario no el link
 
     totalscore = serializers.ReadOnlyField()
     avg_time = serializers.ReadOnlyField()
