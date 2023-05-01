@@ -51,6 +51,18 @@ class User(AbstractBaseUser):
             return total_time / len(times)
         else:
             return 0
+        
+    @property
+    def games_completed(self):
+        from .results import Results
+        number_completed = 0
+        results = Results.objects.all().filter(user=self)
+        for result in results:
+            if (result.completed == True):
+                number_completed += 1
+            if number_completed > 5: # cambiar este numero dependiendo de cuantos juegos sean
+                number_completed = 5
+        return number_completed
 
 
 # 

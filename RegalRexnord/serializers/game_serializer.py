@@ -3,6 +3,8 @@ from RegalRexnord.models.game import Game
 from .results_serializer import ResultsSerializer
 
 
+
+
 # que serializer usar? hyperlinked o serializer normal?
 class GameSerializer(serializers.HyperlinkedModelSerializer): # cambiar a model Serializer para enviar a frontend
     results = ResultsSerializer(many=True, read_only=True)

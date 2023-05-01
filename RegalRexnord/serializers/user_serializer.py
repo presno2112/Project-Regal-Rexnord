@@ -6,6 +6,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer): #modelSerializer p
 
     totalscore = serializers.ReadOnlyField()
     avg_time = serializers.ReadOnlyField()
+    games_completed = serializers.ReadOnlyField()
     class Meta:
         model = User
         fields = "__all__"
