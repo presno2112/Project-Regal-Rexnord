@@ -2,7 +2,7 @@ from rest_framework import serializers
 from RegalRexnord.models import User
 
 class DashboardSerializer(serializers.Serializer):
-    pass
+    dashboard_info = serializers.ReadOnlyField()
 
 # solo funciona con .Serializer
 class UserSerializer(serializers.ModelSerializer): #modelSerializer para enviar el id del usuario no el link
@@ -15,9 +15,8 @@ class UserSerializer(serializers.ModelSerializer): #modelSerializer para enviar 
         fields = "__all__"
         extra_kwargs = {
             "password": {
-            #"write_only": True, 
+            #"write_only": True, por si no quiero que se acceda a la contraseña
             "style":{"input_type":"password"}, 
-            #"min-length" : "5" Hacer que la contraseña tenga mas de x caracteres
 
             }
         }
@@ -30,7 +29,3 @@ class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField(
         required=True
     )
-
-class DashboardSerializer(serializers.Serializer):
-    dashboard_info = serializers.ReadOnlyField()
-    
