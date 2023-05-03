@@ -1,8 +1,12 @@
 from rest_framework import serializers
-from RegalRexnord.models import User
+from RegalRexnord.models import User, Results
 
-class DashboardSerializer(serializers.Serializer):
-    dashboard_info = serializers.ReadOnlyField()
+class DashboardSerializer(serializers.ModelSerializer):
+    #dashboard_info = serializers.ReadOnlyField()
+    
+    class Meta: 
+        model = Results
+        fields = ["attempt","score", "time", "completed"] # y si quiero meter propiedades de usuarios?
 
 # solo funciona con .Serializer
 class UserSerializer(serializers.ModelSerializer): #modelSerializer para enviar el id del usuario no el link
@@ -18,6 +22,9 @@ class UserSerializer(serializers.ModelSerializer): #modelSerializer para enviar 
             #"write_only": True, por si no quiero que se acceda a la contraseña
             "style":{"input_type":"password"}, 
 
+            },
+            "last_login": {
+            "read_only" : True    
             }
         }
 

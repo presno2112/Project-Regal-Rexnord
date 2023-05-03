@@ -53,12 +53,19 @@ class UserView(viewsets.ModelViewSet):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
 
-    @action (methods=["GET"], detail=False, serializer_class=DashboardSerializer, permission_classes=[AllowAny])
+    @action (methods=["GET"], detail=False, serializer_class=DashboardSerializer, permission_classes=[IsAuthenticated])
     def dashboard(self, request):
-        results = Results.objects.all()
-        response = DashboardSerializer(many=True, instance=results, context={'request': request})
-        return Response(response.data, status=status.HTTP_200_OK)
-
+        serializer = DashboardSerializer(data=request.data)
+        results = None
+        if serializer.is_valid():
+            user = User.objects.get(email=request.user)
+            results = user.dashboard_info()
+            print(results)
+            response = DashboardSerializer(results, many=True, context={'request': request})
+            return Response(response.data, status=status.HTTP_200_OK)
+        else: 
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
     #Sign up
     
     

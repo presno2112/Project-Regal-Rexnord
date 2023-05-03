@@ -39,11 +39,11 @@ class User(AbstractBaseUser):
     def dashboard_info(self):
         from .results import Results
         if self.is_admin:
+            results_everyone = Results.objects.all() 
+            return results_everyone
+        else:
             results = Results.objects.all().filter(user=self)
             return results
-        else:
-            results_everyone = Results.objects.all()
-            return results_everyone
 
     @property
     def totalscore(self):
