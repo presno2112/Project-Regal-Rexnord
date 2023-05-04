@@ -9,7 +9,7 @@ class Game(models.Model):
 
     @property
     def leaderboard(self):
-        results = self.results.order_by("-time").all()
+        results = self.results.order_by("time").all()
         return results
 
 # score, time, nombre usuario, booleano
