@@ -81,7 +81,7 @@ class UserView(viewsets.ModelViewSet):
                 #last_login = serializer.validated_data["last_login"],
                 is_admin = serializer.validated_data["is_admin"]
             )
-            user.last_login = timezone.now() 
+            user.last_login = timezone.now()  # Instead of validating data, set the last login manually to right now since it wont get posted
             user.save()
             response = UserSerializer(instance=user, context={'request': request} )
 
