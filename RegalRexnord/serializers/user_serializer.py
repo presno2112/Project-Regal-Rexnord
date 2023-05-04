@@ -18,7 +18,6 @@ class DashboardSerializer(serializers.ModelSerializer):
 # solo funciona con .Serializer
 class UserSerializer(serializers.ModelSerializer): #modelSerializer para enviar el id del usuario no el link
 
-    totalscore = serializers.ReadOnlyField()
     avg_time = serializers.ReadOnlyField()
     games_completed = serializers.ReadOnlyField()
     class Meta:
