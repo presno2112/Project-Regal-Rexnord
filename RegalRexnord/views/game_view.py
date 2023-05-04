@@ -16,7 +16,7 @@ class GameView(viewsets.ModelViewSet):
     permission_classes = [AllowAny]
     authentication_classes = (SessionAuthentication, TokenAuthentication)
 
-    @action (methods=["GET"], detail=False, serializer_class=LeaderboardSerializer, permission_classes=[AllowAny])
+    @action (methods=["GET"], detail=False, serializer_class=LeaderboardSerializer, permission_classes=[IsAuthenticated])
     def leaderboard(self, request):
         games = Game.objects.all()
         # print (games)
