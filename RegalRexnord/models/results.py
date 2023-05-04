@@ -6,7 +6,6 @@ class Results(models.Model): # asi se hace relacional como en el diagrama? es mu
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING) # models.ManyToManyField
     game = models.ForeignKey(Game, related_name="results" , on_delete=models.DO_NOTHING)
     attempt = models.IntegerField(default=0) # hacerlo autoincrement
-    score = models.IntegerField(default=0)
     time = models.FloatField(default=0.0)
     completed = models.BooleanField(default=False)
 

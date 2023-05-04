@@ -2,10 +2,10 @@ from rest_framework import serializers
 from RegalRexnord.models.results import Results
 from RegalRexnord.models import User
 
-class UserSerializer2(serializers.HyperlinkedModelSerializer):
+class UserSerializer2(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["pk","first_name", "last_name"] # por que no me deja seleccionar entre los usuarios?
+        fields = ["pk","first_name", "last_name", "email"] # por que no me deja seleccionar entre los usuarios?
 
 class ResultsSerializer(serializers.ModelSerializer):
     user_data = UserSerializer2(read_only=True, source="user")

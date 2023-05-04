@@ -13,7 +13,7 @@ class DashboardSerializer(serializers.ModelSerializer):
     user_info = UserDashboardSerializer(read_only=True, source="user")
     class Meta: 
         model = Results
-        fields = ["user_info","attempt","score", "time", "completed"] # y si quiero meter propiedades de usuarios?
+        fields = ["user_info","attempt", "time", "completed"] # y si quiero meter propiedades de usuarios?
 
 # solo funciona con .Serializer
 class UserSerializer(serializers.ModelSerializer): #modelSerializer para enviar el id del usuario no el link

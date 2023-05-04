@@ -11,7 +11,7 @@ class GameSerializer(serializers.ModelSerializer): # cambiar a model Serializer 
         model = Game
         fields = "__all__"  
 
-class LeaderboardSerializer(serializers.HyperlinkedModelSerializer):
+class LeaderboardSerializer(serializers.ModelSerializer):
     leaderboard = ResultsSerializer(many=True, read_only=True)
     class Meta:
         model = Game
