@@ -78,9 +78,10 @@ class UserView(viewsets.ModelViewSet):
                 password = serializer.validated_data["password"], 
                 first_name = serializer.validated_data["first_name"], 
                 last_name = serializer.validated_data["last_name"], 
-                last_login = serializer.validated_data["last_login"],
+                #last_login = serializer.validated_data["last_login"],
                 is_admin = serializer.validated_data["is_admin"]
             )
+            user.last_login = timezone.now() 
             user.save()
             response = UserSerializer(instance=user, context={'request': request} )
 
