@@ -23,7 +23,9 @@ class UserView(viewsets.ModelViewSet):
     def current_user(self, request):
         return Response({
             "user": str(request.user),
-            "auth": str(request.auth)
+            "id" : str(request.user.pk),
+            "auth": str(request.auth), 
+            "is_admin":(request.user.is_admin)
         }, status=status.HTTP_200_OK) 
 
     @action (methods=["POST"], detail=False, serializer_class=LoginSerializer, permission_classes=[AllowAny])

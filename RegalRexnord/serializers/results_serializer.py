@@ -5,7 +5,7 @@ from RegalRexnord.models import User
 class UserSerializer2(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["pk","first_name", "last_name", "email"] # por que no me deja seleccionar entre los usuarios?
+        fields = ["pk","first_name", "last_name", "email", "is_admin"] # por que no me deja seleccionar entre los usuarios?
 
 class ResultsSerializer(serializers.ModelSerializer):
     user_data = UserSerializer2(read_only=True, source="user")
